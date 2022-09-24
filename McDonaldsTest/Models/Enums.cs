@@ -4,8 +4,11 @@
     {
         public enum KitechenArea
         {
-            Refrigerator = 0,
-            Fryer = 1
+            Fries = 0,
+            Grill = 1,
+            Salad = 2,
+            Drink = 3,
+            Desert = 4
         }
     }
 }
