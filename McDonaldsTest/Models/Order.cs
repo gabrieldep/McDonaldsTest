@@ -8,6 +8,7 @@ namespace McDonaldsTest.Models
         public int Id { get; set; }
         [NotNull]
         public string GUID { get; set; }
+        public string OrderDetail { get; set; }
         [NotNull]
         public DateTime Received { get; set; }
         public DateTime? Finished { get; set; }
