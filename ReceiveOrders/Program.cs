@@ -1,4 +1,7 @@
-﻿using RabbitMQ.Client;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 
@@ -6,12 +9,22 @@ namespace ReceiveOrders
 {
     public class Receive
     {
-        public static void Main()
-        {
-            Console.WriteLine("Write the queue name:");
-            string? queueName = Console.ReadLine();
+        public static IConfigurationRoot configuration;
 
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+        public static void Main(string[] args)
+        {
+            ServiceCollection serviceCollection = new();
+            ConfigureServices(serviceCollection);
+            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+            var linkRabbitMQ = configuration.GetConnectionString("RabbitMQ");
+            var queueName = configuration.GetValue<string>("QueueName");
+            var password = configuration.GetValue<string>("PasswordMcDonalds");
+
+            Console.WriteLine("Type the password:");
+            while (!Console.ReadLine().Equals(password))
+                Console.WriteLine("Wrong password");
+
+            var factory = new ConnectionFactory() { HostName = linkRabbitMQ };
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
             channel.QueueDeclare(queue: queueName,
@@ -33,6 +46,17 @@ namespace ReceiveOrders
 
             Console.WriteLine(" Press [enter] to exit.");
             Console.ReadLine();
+        }
+
+        private static void ConfigureServices(IServiceCollection serviceCollection)
+        {
+            configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
+                .AddJsonFile("appsettings.json", false)
+                .Build();
+
+            // Add access to generic IConfigurationRoot
+            serviceCollection.AddSingleton(configuration);
         }
     }
 }
