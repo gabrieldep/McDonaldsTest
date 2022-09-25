@@ -1,4 +1,5 @@
 ﻿using McDonaldsTest.DTOs;
+using McDonaldsTest.Interfaces;
 using McDonaldsTest.Models;
 using McDonaldsTest.Services;
 using Microsoft.AspNetCore.Http;
@@ -7,10 +8,18 @@ using System.Net;
 
 namespace McDonaldsTest.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class OrdersController : ControllerBase
     {
+        private readonly IMessageSender _messageSender;
+
+        public OrdersController(IMessageSender messageSender)
+        {
+            _messageSender = messageSender;
+        }
+
         [HttpPost("PostOrder")]
         public IActionResult PostOrder([FromBody] OrderDTO orderDTO, string token)
         {
@@ -22,9 +31,9 @@ namespace McDonaldsTest.Controllers
                 Received = DateTime.Now,
                 ClientIdentifier = orderDTO.ClientIdentifier,
                 OrderDetail = orderDTO.OrderDetails,
-                KitechenArea = Enums.KitchenArea.Drink
+                KitechenArea = orderDTO.KitchenArea
             };
-            RabbitMqService.SendOrderToQueue(order);
+            _messageSender.SendMessage(order);
             return StatusCode((int)HttpStatusCode.OK, new { message = "Order posted" });
         }
     }
