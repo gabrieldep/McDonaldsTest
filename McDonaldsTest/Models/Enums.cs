@@ -2,7 +2,8 @@
 {
     public class Enums
     {
-        public enum KitechenArea
+
+        public enum KitchenArea
         {
             Fries = 0,
             Grill = 1,
