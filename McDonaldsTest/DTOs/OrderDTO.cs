@@ -2,7 +2,7 @@
 {
     public class OrderDTO
     {
-        public string OrderDetails { get; set; }
-        public string ClientIdentifier { get; set; }
+        public string? OrderDetails { get; set; }
+        public string? ClientIdentifier { get; set; }
     }
 }
