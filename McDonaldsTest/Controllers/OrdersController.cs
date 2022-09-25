@@ -22,7 +22,7 @@ namespace McDonaldsTest.Controllers
                 Received = DateTime.Now,
                 ClientIdentifier = orderDTO.ClientIdentifier,
                 OrderDetail = orderDTO.OrderDetails,
-                KitechenArea = Enums.KitechenArea.Drink
+                KitechenArea = Enums.KitchenArea.Drink
             };
             RabbitMqService.SendOrderToQueue(order);
             return StatusCode((int)HttpStatusCode.OK, new { message = "Order posted" });
