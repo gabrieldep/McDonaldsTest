@@ -7,13 +7,13 @@ namespace McDonaldsTest.Models
     {
         public int Id { get; set; }
         [NotNull]
-        public string GUID { get; set; }
-        public string OrderDetail { get; set; }
+        public string? GUID { get; set; }
+        public string? OrderDetail { get; set; }
         [NotNull]
         public DateTime Received { get; set; }
         public DateTime? Finished { get; set; }
         public Enums.KitchenArea KitechenArea { get; set; }
         [NotNull]
-        public string ClientIdentifier { get; set; }
+        public string? ClientIdentifier { get; set; }
     }
 }
