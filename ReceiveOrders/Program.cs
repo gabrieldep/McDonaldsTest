@@ -10,6 +10,8 @@ namespace ReceiveOrders
     {
         public static void Main()
         {
+            var values = Enum.GetValues(typeof(Enums.KitchenArea));
+
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
