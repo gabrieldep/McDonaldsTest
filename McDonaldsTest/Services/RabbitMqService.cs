@@ -1,6 +1,7 @@
 ﻿using McDonaldsTest.Models;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Text;
 
 namespace McDonaldsTest.Services
@@ -11,7 +12,7 @@ namespace McDonaldsTest.Services
         {
             var factory = new ConnectionFactory()
             {
-                HostName = "http://localhost:15672/"
+                HostName = "localhost"
             };
 
             using var connection = factory.CreateConnection();
