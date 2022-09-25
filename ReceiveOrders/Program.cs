@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
@@ -21,7 +20,7 @@ namespace ReceiveOrders
             var password = configuration.GetValue<string>("PasswordMcDonalds");
 
             Console.WriteLine("Type the password:");
-            while (!Console.ReadLine().Equals(password))
+            while (!password.Equals(Console.ReadLine()))
                 Console.WriteLine("Wrong password");
 
             var factory = new ConnectionFactory() { HostName = linkRabbitMQ };
