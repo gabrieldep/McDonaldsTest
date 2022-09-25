@@ -1,7 +1,5 @@
-﻿using McDonaldsTest.Models;
-using RabbitMQ.Client;
+﻿using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System;
 using System.Text;
 
 namespace ReceiveOrders
@@ -10,12 +8,13 @@ namespace ReceiveOrders
     {
         public static void Main()
         {
-            var values = Enum.GetValues(typeof(Enums.KitchenArea));
+            Console.WriteLine("Write the queue name:");
+            string? queueName = Console.ReadLine();
 
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
-            channel.QueueDeclare(queue: Enums.KitchenArea.Drink.ToString(),
+            channel.QueueDeclare(queue: queueName,
                                  durable: false,
                                  exclusive: false,
                                  autoDelete: false,
@@ -28,7 +27,7 @@ namespace ReceiveOrders
                 var message = Encoding.UTF8.GetString(body);
                 Console.WriteLine(" [x] Received {0}", message);
             };
-            channel.BasicConsume(queue: Enums.KitchenArea.Drink.ToString(),
+            channel.BasicConsume(queue: queueName,
                                  autoAck: true,
                                  consumer: consumer);
 
