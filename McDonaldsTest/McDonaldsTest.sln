@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McDonaldsTest", "McDonaldsTest.csproj", "{ECB457A2-EA79-41F7-B88F-3F6D8BDDE6DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "..\TestProject\TestProject.csproj", "{4B4AEC40-6371-4EEB-9BE9-72D1F4C5813B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "..\TestProject\TestProject.csproj", "{4B4AEC40-6371-4EEB-9BE9-72D1F4C5813B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiveOrders", "..\ReceiveOrders\ReceiveOrders.csproj", "{294F3F45-AC3B-4035-9863-BAAE86F60570}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4B4AEC40-6371-4EEB-9BE9-72D1F4C5813B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B4AEC40-6371-4EEB-9BE9-72D1F4C5813B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B4AEC40-6371-4EEB-9BE9-72D1F4C5813B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{294F3F45-AC3B-4035-9863-BAAE86F60570}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{294F3F45-AC3B-4035-9863-BAAE86F60570}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{294F3F45-AC3B-4035-9863-BAAE86F60570}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{294F3F45-AC3B-4035-9863-BAAE86F60570}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
