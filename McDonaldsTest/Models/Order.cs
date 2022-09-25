@@ -12,7 +12,7 @@ namespace McDonaldsTest.Models
         [NotNull]
         public DateTime Received { get; set; }
         public DateTime? Finished { get; set; }
-        public Enums.KitechenArea KitechenArea { get; set; }
+        public Enums.KitchenArea KitechenArea { get; set; }
         [NotNull]
         public string ClientIdentifier { get; set; }
     }
