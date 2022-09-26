@@ -11,6 +11,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IMessageSender, RabbitMqSender>();
 
+builder.Configuration.SetBasePath(Directory.GetParent(AppContext.BaseDirectory)?.FullName)
+                .AddJsonFile("appsettings.json", false)
+                .Build();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
