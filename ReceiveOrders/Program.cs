@@ -1,27 +1,30 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
 
 namespace ReceiveOrders
 {
     public class Receive
     {
-        public static IConfigurationRoot configuration;
+        private static readonly IConfigurationRoot _configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetParent(AppContext.BaseDirectory)?.FullName)
+                .AddJsonFile("appsettings.json", false)
+                .Build();
 
-        public static void Main(string[] args)
+        private static readonly ILogger _logger = WebApplication.CreateBuilder().Build().Logger;
+
+        public static void Main()
         {
-            ServiceCollection serviceCollection = new();
-            ConfigureServices(serviceCollection);
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
-            var linkRabbitMQ = configuration.GetConnectionString("RabbitMQ");
-            var queueName = configuration.GetValue<string>("QueueName");
-            var password = configuration.GetValue<string>("PasswordMcDonalds");
+            _logger.LogInformation("Starting the app");
 
-            Console.WriteLine("Type the password:");
-            while (!password.Equals(Console.ReadLine()))
-                Console.WriteLine("Wrong password");
+            var linkRabbitMQ = _configuration.GetConnectionString("RabbitMQ");
+            var queueName = _configuration.GetValue<string>("QueueName");
+            _logger.LogInformation("Queue from {0}", queueName);
 
             var factory = new ConnectionFactory() { HostName = linkRabbitMQ };
             using var connection = factory.CreateConnection();
@@ -37,25 +40,15 @@ namespace ReceiveOrders
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine(" [x] Received {0}", message);
+                _logger.LogInformation($"[x] Received {message}");
+
             };
             channel.BasicConsume(queue: queueName,
                                  autoAck: true,
                                  consumer: consumer);
 
-            Console.WriteLine(" Press [enter] to exit.");
+            _logger.LogInformation("Press [enter] to exit");
             Console.ReadLine();
-        }
-
-        private static void ConfigureServices(IServiceCollection serviceCollection)
-        {
-            configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
-                .AddJsonFile("appsettings.json", false)
-                .Build();
-
-            // Add access to generic IConfigurationRoot
-            serviceCollection.AddSingleton(configuration);
         }
     }
 }
