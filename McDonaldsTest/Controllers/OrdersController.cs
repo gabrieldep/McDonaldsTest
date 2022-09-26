@@ -1,9 +1,8 @@
 ﻿using McDonaldsTest.DTOs;
 using McDonaldsTest.Interfaces;
 using McDonaldsTest.Models;
-using McDonaldsTest.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 
 namespace McDonaldsTest.Controllers
@@ -25,6 +24,7 @@ namespace McDonaldsTest.Controllers
         {
             if (token != "7e5706d9-c662-4032-92a2-d6a787a3f95b")
                 return StatusCode((int)HttpStatusCode.Unauthorized);
+
             var order = new Order()
             {
                 GUID = Guid.NewGuid().ToString(),

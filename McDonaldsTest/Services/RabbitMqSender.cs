@@ -2,7 +2,6 @@
 using McDonaldsTest.Models;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 using System.Text;
 
 namespace McDonaldsTest.Services
@@ -24,7 +23,7 @@ namespace McDonaldsTest.Services
                                  autoDelete: false,
                                  arguments: null);
 
-            string message = JsonConvert.SerializeObject(order);
+            var message = JsonConvert.SerializeObject(order);
             var body = Encoding.UTF8.GetBytes(message);
 
             channel.BasicPublish(exchange: "",
