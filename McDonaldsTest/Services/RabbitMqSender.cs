@@ -8,11 +8,17 @@ namespace McDonaldsTest.Services
 {
     public class RabbitMqSender : IMessageSender
     {
+        private readonly IConfiguration _configuration;
+        public RabbitMqSender(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public void SendMessage(Order order)
         {
             var factory = new ConnectionFactory()
             {
-                HostName = "localhost"
+                HostName = _configuration.GetConnectionString("RabbitMQ")
             };
 
             using var connection = factory.CreateConnection();
