@@ -40,7 +40,7 @@ namespace ReceiveOrders
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                _logger.LogInformation($"[x] Received {message}");
+                _logger.LogInformation($"[{DateTime.Now.TimeOfDay}] Received {message}");
 
             };
             channel.BasicConsume(queue: queueName,
