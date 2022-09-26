@@ -1,6 +1,7 @@
 ﻿using McDonaldsTest.DTOs;
 using McDonaldsTest.Interfaces;
 using McDonaldsTest.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
@@ -13,16 +14,19 @@ namespace McDonaldsTest.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly IMessageSender _messageSender;
+        private readonly IConfiguration _configuration;
 
-        public OrdersController(IMessageSender messageSender)
+        public OrdersController(IMessageSender messageSender, IConfiguration configuration)
         {
             _messageSender = messageSender;
+            _configuration = configuration;
         }
 
         [HttpPost("PostOrder")]
-        public IActionResult PostOrder([FromBody] OrderDTO orderDTO, string token)
+        public IActionResult PostOrder([FromBody] OrderDTO orderDTO)
         {
-            if (token != "7e5706d9-c662-4032-92a2-d6a787a3f95b")
+            var token = Request.Headers["token"];
+            if (!token.Equals(_configuration.GetValue<string>("Token")))
                 return StatusCode((int)HttpStatusCode.Unauthorized);
 
             var order = new Order()
