@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
 
 namespace ReceiveOrders
 {
@@ -24,7 +22,7 @@ namespace ReceiveOrders
 
             var linkRabbitMQ = _configuration.GetConnectionString("RabbitMQ");
             var queueName = _configuration.GetValue<string>("QueueName");
-            _logger.LogInformation("Queue from {0}", queueName);
+            _logger.LogInformation($"Queue from {queueName}");
 
             var factory = new ConnectionFactory() { HostName = linkRabbitMQ };
             using var connection = factory.CreateConnection();
