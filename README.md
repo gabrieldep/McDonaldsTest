@@ -21,7 +21,7 @@ This solution is composed by 3 solutions. The first is a Web Api developed with 
 ### Request
 `POST /thing/`
 
-    curl -i -H 'Accept: application/json' https://localhost:7027/api/Orders/PostOrder
+    curl -i -H 'Token: token' https://localhost:7027/api/Orders/PostOrder
     { "orderDetails": "foo", "clientIdentifier": "foo", "KitchenArea" : 0}
 
 ## License
