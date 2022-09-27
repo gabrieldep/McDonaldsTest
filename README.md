@@ -26,6 +26,14 @@ This api have only one endpoint that communicates with a RabbitMQ server.
 
     curl -i -H 'Token: token' https://localhost:7027/api/Orders/PostOrder
     { "orderDetails": "foo", "clientIdentifier": "foo", "KitchenArea" : 0}
+    
+### Queue receiver
+Console application developed with Dotnet 6.0 that receives the order data for the correct queue.
+#### Configs
+You can change the queue in the file appsettings.json
+
+### Test project
+This project make integration tests with the Endpoint of the first project and the RabbitMQ
 
 ## License
 
