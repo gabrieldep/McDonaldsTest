@@ -19,7 +19,8 @@ It must comprise a HTTP Server with an endpoint to receive an Order and place it
 
 This solution is composed by 3 projects. 
 You have to install RabbitMQ in your machine to test this solution.
-The installations structions are in the page of [RabbitMQ](https://www.rabbitmq.com/download.html).
+
+The installations structions are in the [RabbitMQ](https://www.rabbitmq.com/download.html) web page.
 
 ### Web Api
 This api was developed with Dotnet 6.0 and have only one endpoint. PostOrder.
