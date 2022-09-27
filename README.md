@@ -17,7 +17,14 @@ It must comprise a HTTP Server with an endpoint to receive an Order and place it
 
 ## Documentation
 
+This solution is composed by 3 solutions. The first is a Web Api developed with Dotnet 6.0. This api have only one endpoint that communicates with a RabbitMQ server.
+### Request
+`POST /thing/`
 
+    curl -i -H 'Accept: application/json' https://localhost:7027/api/Orders/PostOrder
+
+### Response
+    { "orderDetails": "foo", "clientIdentifier": "foo", "KitchenArea" : 0}
 
 ## License
 
