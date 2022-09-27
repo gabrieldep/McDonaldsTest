@@ -37,7 +37,7 @@ namespace McDonaldsTest.Controllers
                 OrderDetail = orderDTO.OrderDetails,
                 KitechenArea = orderDTO.KitchenArea
             };
-            _messageSender.SendMessage(order);
+            _messageSender.SendOrder(order);
             return StatusCode((int)HttpStatusCode.OK, new { message = "Order posted" });
         }
     }

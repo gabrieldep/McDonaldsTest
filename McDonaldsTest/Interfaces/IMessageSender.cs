@@ -4,6 +4,6 @@ namespace McDonaldsTest.Interfaces
 {
     public interface IMessageSender
     {
-        void SendMessage(Order order);
+        void SendOrder(Order order);
     }
 }

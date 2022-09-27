@@ -14,7 +14,11 @@ namespace McDonaldsTest.Services
             _configuration = configuration;
         }
 
-        public void SendMessage(Order order)
+        /// <summary>
+        /// Publish the order in the correct RabbitMq queueu
+        /// </summary>
+        /// <param name="order">Order to publish</param>
+        public void SendOrder(Order order)
         {
             var factory = new ConnectionFactory()
             {
