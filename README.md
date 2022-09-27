@@ -17,7 +17,7 @@ It must comprise a HTTP Server with an endpoint to receive an Order and place it
 
 ## Documentation
 
-This solution is composed by 3 solutions. 
+This solution is composed by 3 projects. 
 
 ### Web Api
 This api was developed with Dotnet 6.0 and have only one endpoint. PostOrder.
