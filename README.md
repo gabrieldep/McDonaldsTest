@@ -19,8 +19,9 @@ It must comprise a HTTP Server with an endpoint to receive an Order and place it
 
 This solution is composed by 3 solutions. 
 
-### Web Api developed with Dotnet 6.0
-This api have only one endpoint that communicates with a RabbitMQ server.
+### Web Api
+This api was developed with Dotnet 6.0 and have only one endpoint. PostOrder.
+This endpoint receives an OrderDetails, a client identifier and a KitchenArea. After that, it post it in the correct queueu on RabbitMq server.
 #### Request
 `POST /thing/`
 
